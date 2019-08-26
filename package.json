@@ -1,0 +1,37 @@
+{
+  "name": "grunt-uglify-es-multicore",
+  "description": "Minify files using uglify-es in parallel.",
+  "version": "0.0.0",
+  "homepage": "https://github.com/morkai/grunt-uglify-es-multicore",
+  "author": {
+    "name": "Łukasz Walukiewicz",
+    "email": "lukasz@miracle.systems",
+    "url": "https://miracle.systems/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/morkai/grunt-uglify-es-multicore.git"
+  },
+  "bugs": {
+    "url": "https://github.com/morkai/grunt-uglify-es-multicore/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/morkai/grunt-uglify-es-multicore/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "tasks/uglify.js",
+  "dependencies": {
+    "uglify-es": "3.x.x",
+    "h5.step": "0.x.x"
+  },
+  "devDependencies": {
+    "grunt": "1.x.x"
+  },
+  "keywords": [
+    "gruntplugin",
+    "uglify",
+    "minify"
+  ]
+}
