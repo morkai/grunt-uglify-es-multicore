@@ -50,7 +50,14 @@ function processNext(done)
         [file.src]: code
       };
 
-      fs.writeFile(file.dst, uglify.minify(input, options).code, this.next());
+      const result = uglify.minify(input, options);
+
+      if (result.error)
+      {
+        return this.skip(result.error);
+      }
+
+      fs.writeFile(file.dst, result.code, this.next());
     },
     function(err)
     {
