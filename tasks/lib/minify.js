@@ -1,10 +1,18 @@
 'use strict';
 
 const fs = require('fs');
+const zlib = require('zlib');
 const step = require('h5.step');
 const uglify = require('uglify-es');
 
 const {options, files} = require(process.argv[2]);
+let brotliOptions = null;
+
+if (options.brotli)
+{
+  brotliOptions = options.brotli;
+  delete options.brotli;
+}
 
 step(
   function()
@@ -57,7 +65,12 @@ function processNext(done)
         return this.skip(result.error);
       }
 
-      fs.writeFile(file.dst, result.code, this.next());
+      fs.writeFile(file.dst, result.code, this.parallel());
+
+      if (brotliOptions && !brotliOptions?.skipFiles[file.dst])
+      {
+        compress(`${file.dst}.br`, result.code, brotliOptions);
+      }
     },
     function(err)
     {
@@ -71,4 +84,30 @@ function processNext(done)
       }
     }
   );
+
+  function compress(dst, uncompressed, options)
+  {
+    step(
+      function()
+      {
+        zlib.brotliCompress(uncompressed, options, this.next());
+      },
+      function(err, compressed)
+      {
+        if (err)
+        {
+          return this.skip(err);
+        }
+
+        fs.writeFile(dst, compressed, this.next());
+      },
+      function(err)
+      {
+        if (err)
+        {
+          throw err;
+        }
+      }
+    );
+  }
 }

@@ -39,7 +39,7 @@ module.exports = function(grunt)
         }
 
         grunt.log.write(`sort... `);
-        
+
         const remainingFiles = files.map((file, i) =>
         {
           return {
