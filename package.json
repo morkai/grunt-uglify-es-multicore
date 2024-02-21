@@ -1,10 +1,11 @@
 {
   "name": "grunt-uglify-es-multicore",
   "version": "0.0.0",
-  "description": "Minify files using uglify-es in parallel.",
+  "description": "Minify files in parallel using Terser.",
   "keywords": [
     "gruntplugin",
     "uglify",
+    "terser",
     "minify"
   ],
   "license": "MIT",
@@ -23,7 +24,7 @@
   "dependencies": {
     "chalk": "2.x.x",
     "h5.step": "0.x.x",
-    "uglify-es": "3.x.x"
+    "terser": "5.x.x"
   },
   "devDependencies": {
     "grunt": "1.x.x"

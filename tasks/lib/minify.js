@@ -3,7 +3,7 @@
 const fs = require('fs');
 const zlib = require('zlib');
 const step = require('h5.step');
-const uglify = require('uglify-es');
+const terser = require('terser');
 
 const {options, files} = require(process.argv[2]);
 let brotliOptions = null;
@@ -58,7 +58,7 @@ function processNext(done)
         [file.src]: code
       };
 
-      const result = uglify.minify(input, options);
+      const result = terser.minify_sync(input, options);
 
       if (result.error)
       {
